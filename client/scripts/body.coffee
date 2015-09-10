@@ -1,6 +1,12 @@
 Template.body.helpers
   questions: ->
-    share.Questions.find {}, createdAt: 1
+    Template.instance().questions = share.Questions.find {}, createdAt: 1
+
+  responses: ->
+    share.Responses.find {}, createdAt: 1
+
+  lastResponse: ->
+    share.Responses.find({}, createdAt: 1).limit 1
 
   topics: ->
     topics = _.uniq share.Questions.find({}).map (q) -> q.topic ?= ''
@@ -8,10 +14,17 @@ Template.body.helpers
 
 Template.body.events
   'submit .new-question': (event) ->
-    console.log 'submit'
     event.preventDefault()
     Meteor.call 'addQuestion', buildQuestion event.target
     resetForm event.target
+
+  'submit .new-response': (event) ->
+    event.preventDefault()
+    response = {}
+    for question in Template.instance().questions.fetch()
+      response[question._id] = event.target[question._id].value
+      event.target[question._id].value = ''
+    Meteor.call 'addResponse', response
 
 buildQuestion = (form) ->
   text:  form.text.value
