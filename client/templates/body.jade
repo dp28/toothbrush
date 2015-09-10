@@ -1,4 +1,20 @@
 body
+  .navbar
+    +loginButtons
+
   header
     h1 Toothbrush
     p What's up?
+
+  h2 Questions
+
+  ol
+    each questions
+      li
+        +question
+
+  form.new-question
+    input(type='text' name='text' placeholder='New question ...')
+
+template(name='question')
+  .question #{text}
