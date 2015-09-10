@@ -28,10 +28,3 @@ body
       input(type='text' name='newTopic' placeholder='Add new topic ...')
 
     button(type='submit') Submit
-
-template(name='question')
-  .question #{text}
-    .topic #{topic}
-
-template(name='topic')
-  option(value='#{value}') #{value}
