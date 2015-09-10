@@ -14,7 +14,24 @@ body
         +question
 
   form.new-question
-    input(type='text' name='text' placeholder='New question ...')
+    label
+      div New question
+      input(type='text' name='text' placeholder='New question ...')
+
+    label
+      div Topic
+      select(name='topic')
+        option(value='') Select or add new
+        each topics
+          +topic
+
+      input(type='text' name='newTopic' placeholder='Add new topic ...')
+
+    button(type='submit') Submit
 
 template(name='question')
   .question #{text}
+    .topic #{topic}
+
+template(name='topic')
+  option(value='#{value}') #{value}
