@@ -6,8 +6,11 @@ Template.body.helpers
     share.Responses.find {}, createdAt: 1
 
   topics: ->
-    topics = _.uniq share.Questions.find({}).map (q) -> q.topic ?= ''
-    topics.map (topic) -> topic: topic
+    distinctValues share.Questions, 'topic'
+
+  questionTypes: ->
+    ['text', 'number', 'range', 'date', 'time', 'email', 'url'].map (type) ->
+      type: type
 
 Template.body.events
   'submit .new-question': (event) ->
@@ -19,15 +22,27 @@ Template.body.events
     event.preventDefault()
     response = {}
     for question in Template.instance().questions.fetch()
-      response[question._id] = event.target[question._id].value
-      event.target[question._id].value = ''
+      if event.target[question._id]?
+        response[question._id] = event.target[question._id].value
+        event.target[question._id].value = ''
     Meteor.call 'addResponse', response
+
+distinctValues = (model, valueName, defaultValue = '') ->
+  values = _.uniq model.find({}).map (m) ->
+    if !!m[valueName] then m[valueName] else defaultValue
+
+  values.map (value) ->
+    result = {}
+    result[valueName] = value
+    result
 
 buildQuestion = (form) ->
   text:  form.text.value
   topic: form.newTopic.value or form.topic.value
+  type:  form.type.value
 
 resetForm = (form) ->
   form.text.value     = ''
   form.topic.value    = ''
   form.newTopic.value = ''
+  form.type.value     = ''

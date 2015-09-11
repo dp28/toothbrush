@@ -26,6 +26,12 @@ body
       div New question
       input(type='text' name='text' placeholder='New question ...')
 
+    label Type
+      div Answer type
+      select(name='type')
+        each questionTypes
+          +questionType
+
     label
       div Topic
       select(name='topic')

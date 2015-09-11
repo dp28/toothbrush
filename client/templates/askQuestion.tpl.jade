@@ -1,2 +1,6 @@
 label #{text}
-  input(type='text' name='#{_id}' id='#{_id}' value='#{previousResponse}')
+  input(
+    type='#{questionType}'
+    name='#{_id}'
+    id='#{_id}'
+    value='#{previousResponse}')
