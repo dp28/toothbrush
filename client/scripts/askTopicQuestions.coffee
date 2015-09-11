@@ -3,5 +3,4 @@ Template.askTopicQuestions.helpers
     @topic or 'No topic'
 
   questions: ->
-    console.log @topic
     share.Questions.find { topic: @topic }, createdAt: 1

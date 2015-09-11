@@ -5,9 +5,6 @@ Template.body.helpers
   responses: ->
     share.Responses.find {}, createdAt: 1
 
-  lastResponse: ->
-    share.Responses.find({}, createdAt: 1).limit 1
-
   topics: ->
     topics = _.uniq share.Questions.find({}).map (q) -> q.topic ?= ''
     topics.map (topic) -> topic: topic
