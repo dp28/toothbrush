@@ -10,7 +10,7 @@ Template.body.helpers
 
   topics: ->
     topics = _.uniq share.Questions.find({}).map (q) -> q.topic ?= ''
-    topics.map (topic) -> value: topic
+    topics.map (topic) -> topic: topic
 
 Template.body.events
   'submit .new-question': (event) ->

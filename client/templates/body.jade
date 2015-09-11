@@ -9,8 +9,8 @@ body
   form.new-response
     h2 New response
 
-    each questions
-      +askQuestion
+    each topics
+      +askTopicQuestions
 
     button(type='submit') Submit
 
@@ -36,7 +36,3 @@ body
       input(type='text' name='newTopic' placeholder='Add new topic ...')
 
     button(type='submit') Submit
-
-template(name='askQuestion')
-  label #{text}
-    input(type='text' name='#{_id}' id='#{_id}')
