@@ -1,13 +1,12 @@
 body
-  .navbar
-    +loginButtons
-
   header
     h1 Toothbrush
     p What's up?
 
-  p #{responseCount}
+  +loginButtons
 
-  +responseForm
-
-  +questionForm
+  if currentUser
+    +responseForm
+    +questionForm
+  else
+    p Please log in / create an account

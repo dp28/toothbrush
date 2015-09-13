@@ -5,3 +5,6 @@ Template.askQuestion.helpers
 
   questionType: ->
     @type ? 'text'
+
+  isText: ->
+    !@type? or @type is 'text'

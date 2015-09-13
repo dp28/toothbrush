@@ -1,6 +1,8 @@
 .panel
   form.new-response
-    h2 New response
+    header
+      h2 New response
+      p #{responseCount} responses so far
 
     each topics
       +askTopicQuestions

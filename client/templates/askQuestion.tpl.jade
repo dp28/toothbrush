@@ -1,9 +1,14 @@
 label
-  span #{text}
-  input(
-    type='#{questionType}'
-    name='#{_id}'
-    id='#{_id}'
-    value='#{previousResponse}'
-    min='#{min}'
-    max='#{max}')
+  .label-text #{text}
+
+  if isText
+    textarea(name='#{_id}' id='#{_id}') #{previousResponse}
+
+  else
+    input(
+      type='#{questionType}'
+      name='#{_id}'
+      id='#{_id}'
+      value='#{previousResponse}'
+      min='#{min}'
+      max='#{max}')

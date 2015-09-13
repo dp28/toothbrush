@@ -1,33 +1,28 @@
 .panel
   h2 Questions
 
-  ol
-    each questions
-      li
-        +question
-
   form.new-question
     label
-      div New question
-      input(type='text' name='text')
+      h3.label-text New question
+      textarea(name='text')
 
     label
-      div Answer type
+      .label-text Answer type
       select.question-type(name='type')
         each questionTypes
           +questionType
 
     if questionIsRange
       label
-        div Minimum
+        .label-text Minimum
         input(type='number' name='min' value='1')
 
       label
-        div Maximum
+        .label-text Maximum
         input(type='number' name='max' value='10')
 
     label
-      div Topic
+      .label-text Topic
       select(name='topic')
         option(value='') Select or add new
         each topics
@@ -36,3 +31,10 @@
       input(type='text' name='newTopic' placeholder='Add new topic ...')
 
     button(type='submit') Submit
+
+  h3 All questions
+
+  ol.question-list
+    each questions
+      li
+        +question

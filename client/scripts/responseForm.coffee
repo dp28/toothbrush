@@ -2,6 +2,9 @@ Template.responseForm.onRendered ->
   Template.instance().questions = share.Questions.find {}, createdAt: 1
 
 Template.responseForm.helpers
+  responseCount: ->
+    share.Responses.find({}).count()
+
   topics: ->
     share.distinctValues share.Questions, 'topic'
 
