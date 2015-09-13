@@ -1,0 +1,8 @@
+.panel
+  form.new-response
+    h2 New response
+
+    each topics
+      +askTopicQuestions
+
+    button(type='submit') Submit

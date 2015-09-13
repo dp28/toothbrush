@@ -6,48 +6,8 @@ body
     h1 Toothbrush
     p What's up?
 
-  form.new-response
-    h2 New response
+  p #{responseCount}
 
-    each topics
-      +askTopicQuestions
+  +responseForm
 
-    button(type='submit') Submit
-
-  h2 Questions
-
-  ol
-    each questions
-      li
-        +question
-
-  form.new-question
-    label
-      div New question
-      input(type='text' name='text')
-
-    label
-      div Answer type
-      select.question-type(name='type')
-        each questionTypes
-          +questionType
-
-    if questionIsRange
-      label
-        div Minimum
-        input(type='number' name='min' value='1')
-
-      label
-        div Maximum
-        input(type='number' name='max' value='10')
-
-    label
-      div Topic
-      select(name='topic')
-        option(value='') Select or add new
-        each topics
-          +topic
-
-      input(type='text' name='newTopic' placeholder='Add new topic ...')
-
-    button(type='submit') Submit
+  +questionForm
