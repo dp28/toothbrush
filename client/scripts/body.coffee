@@ -8,6 +8,9 @@ Template.body.helpers
   topics: ->
     distinctValues share.Questions, 'topic'
 
+  questionIsRange: ->
+    Session.get('questionType') is 'range'
+
   questionTypes: ->
     ['text', 'number', 'range', 'date', 'time', 'email', 'url'].map (type) ->
       type: type
@@ -27,6 +30,9 @@ Template.body.events
         event.target[question._id].value = ''
     Meteor.call 'addResponse', response
 
+  'change .question-type': (event) ->
+    Session.set 'questionType', event.target.value
+
 distinctValues = (model, valueName, defaultValue = '') ->
   values = _.uniq model.find({}).map (m) ->
     if !!m[valueName] then m[valueName] else defaultValue
@@ -37,9 +43,14 @@ distinctValues = (model, valueName, defaultValue = '') ->
     result
 
 buildQuestion = (form) ->
-  text:  form.text.value
-  topic: form.newTopic.value or form.topic.value
-  type:  form.type.value
+  question =
+    text:  form.text.value
+    topic: form.newTopic.value or form.topic.value
+    type:  form.type.value
+
+  question.min = form.min.value if form.min?
+  question.max = form.max.value if form.max?
+  question
 
 resetForm = (form) ->
   form.text.value     = ''

@@ -24,13 +24,22 @@ body
   form.new-question
     label
       div New question
-      input(type='text' name='text' placeholder='New question ...')
+      input(type='text' name='text')
 
-    label Type
+    label
       div Answer type
-      select(name='type')
+      select.question-type(name='type')
         each questionTypes
           +questionType
+
+    if questionIsRange
+      label
+        div Minimum
+        input(type='number' name='min' value='1')
+
+      label
+        div Maximum
+        input(type='number' name='max' value='10')
 
     label
       div Topic
